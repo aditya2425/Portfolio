@@ -14,6 +14,14 @@
     <!-- Cursor glow effect -->
     <div class="cursor-glow" id="cursorGlow"></div>
 
+    <!-- Scroll progress bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -52,11 +60,15 @@
                 <div class="hero-intro-text">
                     <div class="hero-badge">
                         <span class="badge-dot"></span>
-                        Available for opportunities
+                        <span id="heroGreeting">Available for opportunities</span>
                     </div>
                     <h1 class="hero-title">
-                        <span class="hero-line">Hi, I'm <span class="gradient-text">Aditya</span></span>
-                        <span class="hero-line">Generative AI / Agentic AI Engineer</span>
+                        <span class="hero-line"><span id="heroSalutation">Hi</span>, I'm <span class="gradient-text">Aditya</span></span>
+                        <span class="hero-line">
+                            <span class="role-rotator" aria-live="polite">
+                                <span id="roleText">Generative AI / Agentic AI Engineer</span><span class="role-cursor">|</span>
+                            </span>
+                        </span>
                     </h1>
                 </div>
             </div>
@@ -69,7 +81,7 @@
                     <span class="stat-label">Years Experience</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-number" data-target="5">0</span>
+                    <span class="stat-number" data-target="8">0</span>
                     <span class="stat-label">GenAI Projects</span>
                 </div>
                 <div class="stat">
@@ -118,7 +130,7 @@
                 <div class="about-text">
                     <p>I'm a Generative AI / Agentic AI Engineer who believes in building AI systems that go beyond demos. With <strong>3+ years at Accenture</strong>, I've shipped production AI for some of the world's largest companies.</p>
                     <p>My work spans the full GenAI lifecycle: from designing <strong>RAG pipelines</strong> with hybrid search and reranking, to orchestrating <strong>multi-agent systems</strong> with Semantic Kernel and LangGraph, to <strong>fine-tuning LLMs</strong> with QLoRA, and building <strong>safety guardrails</strong> with drift detection and A/B testing.</p>
-                    <p>Beyond my enterprise work, I've built <strong>5 open-source GenAI projects</strong> covering every major area of the GenAI stack — RAG, multi-agent systems, fine-tuning, observability, and MLOps — each with comprehensive testing and production-ready architecture.</p>
+                    <p>Beyond my enterprise work, I've built <strong>8 open-source GenAI projects</strong> covering every major area of the GenAI stack — RAG, multi-agent systems, fine-tuning, multimodal, prompt engineering, safety/observability, and MLOps — each with comprehensive testing and production-ready architecture.</p>
                     <div class="about-highlights">
                         <div class="highlight">
                             <i class="fas fa-building"></i>
@@ -259,7 +271,7 @@
             <div class="section-header">
                 <span class="section-tag">// projects</span>
                 <h2 class="section-title">Open Source <span class="gradient-text">GenAI Projects</span></h2>
-                <p class="section-desc">5 production-ready projects covering the complete Generative AI stack</p>
+                <p class="section-desc">8 production-ready projects covering the complete Generative AI stack</p>
             </div>
 
             <!-- Project Filter -->
@@ -279,7 +291,7 @@
                             <i class="fas fa-brain"></i>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/aditya2425/docmind" target="_blank" title="View on GitHub">
+                            <a href="https://github.com/aditya2425/DocuMind" target="_blank" title="View on GitHub">
                                 <i class="fab fa-github"></i>
                             </a>
                         </div>
@@ -444,6 +456,75 @@
                     </div>
                 </div>
 
+                <!-- Project 6: VisionRAG -->
+                <div class="project-card" data-category="rag">
+                    <div class="project-card-header">
+                        <div class="project-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/aditya2425/VisionRAG" target="_blank" title="View on GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <h3 class="project-name">VisionRAG</h3>
+                    <p class="project-tagline">Multimodal RAG Pipeline</p>
+                    <p class="project-desc">Multimodal RAG handling PDF + image ingestion with OCR extraction, vision embeddings, hybrid retrieval, and multimodal answer generation. Processes complex documents beyond plain text.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>OCR</span>
+                        <span>Vision</span>
+                        <span>Embeddings</span>
+                        <span>Hybrid Retrieval</span>
+                    </div>
+                </div>
+
+                <!-- Project 7: InterviewGPT -->
+                <div class="project-card" data-category="llm">
+                    <div class="project-card-header">
+                        <div class="project-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/aditya2425/InterviewGPT" target="_blank" title="View on GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <h3 class="project-name">InterviewGPT</h3>
+                    <p class="project-tagline">Adaptive Mock Interview System</p>
+                    <p class="project-desc">AI mock interview system with adaptive difficulty, 14 heuristic scoring functions, session management, and progress analytics for personalized improvement.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>OpenAI</span>
+                        <span>Streamlit</span>
+                        <span>Analytics</span>
+                    </div>
+                </div>
+
+                <!-- Project 8: ToolBridge -->
+                <div class="project-card" data-category="agents">
+                    <div class="project-card-header">
+                        <div class="project-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/aditya2425/ToolBridge" target="_blank" title="View on GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <h3 class="project-name">ToolBridge</h3>
+                    <p class="project-tagline">Prompt Engineering Toolkit</p>
+                    <p class="project-desc">Prompt engineering toolkit with template management, chain-of-thought patterns, few-shot optimization, A/B testing, and version control for prompt iterations.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>Prompt Engineering</span>
+                        <span>A/B Testing</span>
+                        <span>Versioning</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

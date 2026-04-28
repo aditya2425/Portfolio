@@ -255,4 +255,119 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // === Scroll Progress Bar ===
+    const scrollProgress = document.getElementById('scrollProgress');
+    if (scrollProgress) {
+        const updateProgress = () => {
+            const docH = document.documentElement.scrollHeight - window.innerHeight;
+            const pct = docH > 0 ? (window.scrollY / docH) * 100 : 0;
+            scrollProgress.style.width = pct + '%';
+        };
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        updateProgress();
+    }
+
+    // === Back to Top Button ===
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+        const toggleBackToTop = () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        };
+        window.addEventListener('scroll', toggleBackToTop, { passive: true });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // === Time-aware greeting ===
+    const heroSalutation = document.getElementById('heroSalutation');
+    const heroGreeting = document.getElementById('heroGreeting');
+    if (heroSalutation || heroGreeting) {
+        const hour = new Date().getHours();
+        let salutation = 'Hi';
+        let badge = 'Available for opportunities';
+        if (hour < 5) { salutation = 'Up late'; badge = 'Burning the midnight oil'; }
+        else if (hour < 12) { salutation = 'Good morning'; badge = 'Available for opportunities'; }
+        else if (hour < 17) { salutation = 'Good afternoon'; badge = 'Available for opportunities'; }
+        else if (hour < 21) { salutation = 'Good evening'; badge = 'Available for opportunities'; }
+        else { salutation = 'Good night'; badge = 'Reach out — I\'ll see it tomorrow'; }
+        if (heroSalutation) heroSalutation.textContent = salutation;
+        if (heroGreeting) heroGreeting.textContent = badge;
+    }
+
+    // === Role rotator (typewriter cycling roles) ===
+    const roleText = document.getElementById('roleText');
+    if (roleText) {
+        const roles = [
+            'Generative AI / Agentic AI Engineer',
+            'RAG Pipeline Architect',
+            'Multi-Agent Systems Builder',
+            'LLM Fine-Tuning Engineer',
+            'AI Safety & MLOps Engineer'
+        ];
+        let roleIdx = 0;
+        let charIdx = roles[0].length;
+        let deleting = false;
+        let lastText = roles[0];
+
+        const typeStep = () => {
+            const current = roles[roleIdx];
+            if (!deleting) {
+                charIdx++;
+                if (charIdx > current.length) {
+                    deleting = true;
+                    setTimeout(typeStep, 2000); // pause at full text
+                    return;
+                }
+            } else {
+                charIdx--;
+                if (charIdx <= 0) {
+                    deleting = false;
+                    roleIdx = (roleIdx + 1) % roles.length;
+                    charIdx = 0;
+                }
+            }
+            const next = roles[roleIdx].substring(0, charIdx);
+            roleText.textContent = next;
+            const delay = deleting ? 30 : 55;
+            setTimeout(typeStep, delay);
+        };
+
+        // Start after initial render so the first role displays cleanly for a moment
+        setTimeout(() => {
+            deleting = true;
+            charIdx = lastText.length;
+            typeStep();
+        }, 2500);
+    }
+
+    // === Magnetic hover for hero CTA buttons ===
+    const heroButtons = document.querySelectorAll('.hero-cta .btn');
+    if (window.innerWidth > 768) {
+        heroButtons.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const relX = e.clientX - rect.left - rect.width / 2;
+                const relY = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${relX * 0.25}px, ${relY * 0.35}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = '';
+            });
+        });
+    }
+
+    // === Keyboard shortcut: press "/" to focus first nav link ===
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+            e.preventDefault();
+            const firstNav = document.querySelector('.nav-link');
+            if (firstNav) firstNav.focus();
+        }
+    });
 });
